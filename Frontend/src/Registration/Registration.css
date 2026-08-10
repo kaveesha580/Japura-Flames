@@ -1,0 +1,39 @@
+/* ===========================
+   CSS VARIABLES
+   =========================== */
+:root {
+  --primary: #e1a22c;
+  --primary-light: #caa251;
+  --primary-dark: #b46d11;
+  --secondary: #6e2e00;
+
+  --bg-primary: #faf8f7;
+  --bg-secondary: #b57f59;
+  --bg-accent: #ff6a00;
+
+  --white: #ffffff;
+  --text: #ffffff;
+  --text-light: #cfcfcf;
+  --text-dark: #c37500;
+
+  --input-bg: #ffffff;
+  --card-bg: rgba(18, 18, 18, 0.92);
+
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+
+  --radius: 15px;
+  --radius-sm: 8px;
+
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
