@@ -1,7 +1,10 @@
 import React from 'react';
+import { useRegistration } from './Registration';
 import './Registration.css';
 
 function Registration() {
+  const { formData, handleChange } = useRegistration();
+
   return (
     <div className='loginGlassCard'>
       <div className="registration-container">
@@ -36,6 +39,8 @@ function Registration() {
                       name="fullName"
                       className="form-input"
                       placeholder="Your Full Name"
+                      value={formData.fullName}
+                      onChange={handleChange}
                       required
                     />
                     <i className="fa-solid fa-user input-icon"></i>
@@ -53,6 +58,8 @@ function Registration() {
                       name="email"
                       className="form-input"
                       placeholder="example@email.com"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
@@ -70,6 +77,8 @@ function Registration() {
                       name="phone"
                       className="form-input"
                       placeholder="+94 77 123 4567"
+                      value={formData.phone}
+                      onChange={handleChange}
                       required
                     />
                     <i className="fa-solid fa-phone input-icon"></i>
