@@ -85,6 +85,44 @@ function Registration() {
                   </div>
                 </div>
 
+                {/* Password */}
+                <div className="form-group">
+                  <label className="form-label">
+                    Password <span className="required-star">*</span>
+                  </label>
+                  <div className="input-with-icon">
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-input"
+                      placeholder="Min 6 characters"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <i className="fa-solid fa-lock input-icon"></i>
+                  </div>
+                </div>
+
+                {/* Confirm Password */}
+                <div className="form-group">
+                  <label className="form-label">
+                    Confirm Password <span className="required-star">*</span>
+                  </label>
+                  <div className="input-with-icon">
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      className="form-input"
+                      placeholder="Re-enter password"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      required
+                    />
+                    <i className="fa-solid fa-check-circle input-icon"></i>
+                  </div>
+                </div>
+
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
                   <button type="submit" className="btn-submit">
                     Register
