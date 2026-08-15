@@ -45,6 +45,7 @@ function Registration() {
                     />
                     <i className="fa-solid fa-user input-icon"></i>
                   </div>
+                  {errors.fullName && <span className="error-message">{errors.fullName}</span>}
                 </div>
 
                 {/* Email */}
@@ -64,6 +65,7 @@ function Registration() {
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
                   </div>
+                  {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
 
                 {/* Phone */}
@@ -83,6 +85,47 @@ function Registration() {
                     />
                     <i className="fa-solid fa-phone input-icon"></i>
                   </div>
+                  {errors.phone && <span className="error-message">{errors.phone}</span>}
+                </div>
+
+                {/* Password */}
+                <div className="form-group">
+                  <label className="form-label">
+                    Password <span className="required-star">*</span>
+                  </label>
+                  <div className="input-with-icon">
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-input"
+                      placeholder="Min 6 characters"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <i className="fa-solid fa-lock input-icon"></i>
+                  </div>
+                  {errors.password && <span className="error-message">{errors.password}</span>}
+                </div>
+
+                {/* Confirm Password */}
+                <div className="form-group">
+                  <label className="form-label">
+                    Confirm Password <span className="required-star">*</span>
+                  </label>
+                  <div className="input-with-icon">
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      className="form-input"
+                      placeholder="Re-enter password"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      required
+                    />
+                    <i className="fa-solid fa-check-circle input-icon"></i>
+                  </div>
+                  {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
                 </div>
 
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
