@@ -3,7 +3,7 @@ import { useRegistration } from './Registration';
 import './Registration.css';
 
 function Registration() {
-  const { formData, handleChange } = useRegistration();
+  const {formData, errors, handleChange, handleSubmit} = useRegistration();
 
   return (
     <div className='loginGlassCard'>
@@ -33,7 +33,7 @@ function Registration() {
                   <label className="form-label">
                     Full Name <span className="required-star">*</span>
                   </label>
-                  <div className="input-with-icon">
+                  <div className={`input-with-icon ${errors.fullName ? 'has-error' : ''}`}>
                     <input
                       type="text"
                       name="fullName"
@@ -53,7 +53,7 @@ function Registration() {
                   <label className="form-label">
                     Email Address <span className="required-star">*</span>
                   </label>
-                  <div className="input-with-icon">
+                  <div className={`input-with-icon ${errors.email ? 'has-error' : ''}`}>
                     <input
                       type="email"
                       name="email"
@@ -73,7 +73,7 @@ function Registration() {
                   <label className="form-label">
                     Phone Number <span className="required-star">*</span>
                   </label>
-                  <div className="input-with-icon">
+                  <div className={`input-with-icon ${errors.phone ? 'has-error' : ''}`}>
                     <input
                       type="tel"
                       name="phone"
@@ -93,7 +93,7 @@ function Registration() {
                   <label className="form-label">
                     Password <span className="required-star">*</span>
                   </label>
-                  <div className="input-with-icon">
+                  <div className={`input-with-icon ${errors.password ? 'has-error' : ''}`}>
                     <input
                       type="password"
                       name="password"
@@ -113,7 +113,7 @@ function Registration() {
                   <label className="form-label">
                     Confirm Password <span className="required-star">*</span>
                   </label>
-                  <div className="input-with-icon">
+                   <div className={`input-with-icon ${errors.confirmPassword ? 'has-error' : ''}`}>
                     <input
                       type="password"
                       name="confirmPassword"
@@ -127,6 +127,41 @@ function Registration() {
                   </div>
                   {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
                 </div>
+
+                {/* Account Type */}
+                <div className="form-group">
+                  <label className="form-label">Account Type</label>
+                  <div className="input-with-icon">
+                    <select
+                      name="accountType"
+                      className="form-input"
+                      value={formData.accountType}
+                      onChange={handleChange}
+                    >
+                      <option value="personal">Personal</option>
+                      <option value="organizer">Organizer</option>
+                    </select>
+                    <i className="fa-solid fa-user-tie input-icon"></i>
+                  </div>
+                </div>
+
+                {/* Organization – conditional */}
+                {formData.accountType === 'organizer' && (
+                  <div className="form-group">
+                    <label className="form-label">Organization</label>
+                    <div className="input-with-icon">
+                      <input
+                        type="text"
+                        name="organization"
+                        className="form-input"
+                        placeholder="Organization (Optional)"
+                        value={formData.organization}
+                        onChange={handleChange}
+                      />
+                      <i className="fa-solid fa-building input-icon"></i>
+                    </div>
+                  </div>
+                )}
 
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
                   <button type="submit" className="btn-submit">
