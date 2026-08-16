@@ -1,5 +1,5 @@
 //-----------------------------------
-//Basic login component skeleton
+// * Basic login component skeleton
 //-----------------------------------
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,15 @@ const Login = () => {
 
 
   return (
-    <div className={styles.loginContainer}></div>
+    <div className={styles.loginContainer}>
+     {/* Added glass card and header section */}
+     <div className={styles.loginGlassCard}>
+        <div className={styles.loginHeader}>
+          <h2 className={styles.title}>Japura Flames</h2>
+          <p className={styles.subtitle}>Welcome back! Please login to your account.</p>
+        </div>
+        </div>
+    </div>
      );
 };
 export default Login;
