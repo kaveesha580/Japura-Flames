@@ -11,6 +11,7 @@
   --second-bg: #fffaf5; 
 }
 
+
 /*KEYFRAMES */
 @keyframes scrollLeft {
   from {
@@ -20,6 +21,7 @@
     transform: translateX(-100%);
   }
 }
+
 
 
 html {
@@ -290,6 +292,7 @@ nav {
   background-color: var(--white-color);
   border-radius: 20px;
   padding: 10px 15px;}
+
 
   /* SERVICES line*/
   .home-services {
