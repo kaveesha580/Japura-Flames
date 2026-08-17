@@ -101,7 +101,18 @@ function Home() {
         </div>
       </div>
 
-      
+         {/* Services Section */}
+      <section className="home-services reveal-section" aria-label="Our services" ref={servicesRef}>
+        <div className="services-label">
+        <span>Photography</span>
+        <span>Videography</span>
+        <span>Live Broadcasting</span>
+        <span>Graphic Design</span>
+        <span>Article Writing</span>
+        <span>Poetry</span>
+        </div>
+      </section>
+
 
   
     </div>
