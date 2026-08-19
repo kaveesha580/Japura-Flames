@@ -9,8 +9,12 @@ import myLogo from '../assets/logo.png';
 
 const Login = () => {
   const navigate = useNavigate();
+  // * Form state //
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
-
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className={styles.loginContainer}>
