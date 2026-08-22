@@ -111,4 +111,240 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.5px;
+
+/* ===========================
+   FORM CONTENT
+   =========================== */
+.form-content {
+  color: var(--text-dark);
+  padding: 35px;
+}
+
+/* ===========================
+   SECTION TITLES
+   =========================== */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  font-family: 'Montserrat', 'Inter', sans-serif;
+}
+
+.section-number {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   FORM GRID
+   =========================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   FORM GROUP
+   =========================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #dbdbdb;
+  margin-bottom: 8px;
+}
+
+.required-star {
+  color: #ff4444;
+  margin-left: 3px;
+}
+
+/* ===========================
+   INPUT WITH ICON
+   =========================== */
+.input-with-icon {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  transition: var(--transition);
+  pointer-events: none;
+  font-size: 16px;
+}
+
+/* ===========================
+   FORM INPUTS
+   =========================== */
+.form-input {
+  width: 100%;
+  padding: 14px 16px 14px 45px;
+  background: #ffffff;
+  color: var(--text-dark);
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  transition: var(--transition);
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-input::placeholder {
+  color: #9c9c9c;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.12);
+  outline: none;
+}
+
+.input-with-icon:focus-within .input-icon {
+  color: var(--primary);
+}
+
+.form-input:hover {
+  border-color: #ffb07a;
+}
+
+/* ===========================
+   ERROR STATES
+   =========================== */
+.has-error .form-input {
+  border-color: #ff0000;
+}
+
+.has-error .form-input:focus {
+  box-shadow: 0 0 0 5px rgba(255, 0, 0, 0.12);
+}
+
+.has-error .input-icon {
+  color: #ff0000;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+.submit-section {
+  margin-top: 35px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-submit,
+.btn-reset {
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-submit {
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 107, 0, 0.25);
+}
+
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 107, 0, 0.35);
+}
+
+.btn-submit:active {
+  transform: translateY(0px);
+}
+
+.btn-reset {
+  background: transparent;
+  color: white;
+  border: 1px solid #f8f8f8;
+}
+
+.btn-reset:hover {
+  border-color: #6b7280;
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+}
+
+.btn-reset:active {
+  transform: scale(0.98);
+}
+
+.btn-back-to-login {
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+  color: white;
+  border: #00000000 solid 2px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-back-to-login:hover:not(:disabled) {
+  background: #f7f7f700;
+  transform: translateY(-2px);
+  border-color: white;
+}
+
+.btn-back-to-login:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-back-to-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-submit:disabled,
+.btn-reset:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
 }
