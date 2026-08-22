@@ -3,7 +3,17 @@ import { useRegistration } from './Registration';
 import './Registration.css';
 
 function Registration() {
-  const {formData, errors, handleChange, handleSubmit} = useRegistration();
+  const {
+    formData,
+    errors,
+    isSubmitted,
+    loading,
+    serverError,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    goToLogin,
+  } = useRegistration();
 
   return (
     <div className='loginGlassCard'>
@@ -20,6 +30,12 @@ function Registration() {
         </div>
 
         <div className="form-content">
+          {serverError && (
+            <div className="server-error-message">
+              <i className="fa-solid fa-exclamation-circle"></i>
+              {serverError}
+            </div>
+          )}
           <form id="eventRegistrationForm" noValidate>
             <div style={{ marginTop: '30px', paddingTop: '25px', borderTop: '1px solid #ddd' }}>
               <div className="section-title">
@@ -42,6 +58,7 @@ function Registration() {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
+                      disabled={loading}
                     />
                     <i className="fa-solid fa-user input-icon"></i>
                   </div>
@@ -62,6 +79,7 @@ function Registration() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      disabled={loading}
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
                   </div>
@@ -82,6 +100,7 @@ function Registration() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
+                      disabled={loading}
                     />
                     <i className="fa-solid fa-phone input-icon"></i>
                   </div>
@@ -102,6 +121,7 @@ function Registration() {
                       value={formData.password}
                       onChange={handleChange}
                       required
+                      disabled={loading}
                     />
                     <i className="fa-solid fa-lock input-icon"></i>
                   </div>
@@ -122,6 +142,7 @@ function Registration() {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       required
+                      disabled={loading}
                     />
                     <i className="fa-solid fa-check-circle input-icon"></i>
                   </div>
@@ -164,8 +185,38 @@ function Registration() {
                 )}
 
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
-                  <button type="submit" className="btn-submit">
-                    Register
+                  <button type="submit" className="btn-submit" disabled={loading}>
+                    {loading ? (
+                      <>
+                        <i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>
+                        Registering...
+                      </>
+                    ) : (
+                      <>
+                        <i className="fa-solid fa-paper-plane" style={{ marginRight: '8px' }}></i>
+                        Register
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn-reset"
+                    onClick={handleReset}
+                    disabled={loading}
+                  >
+                    <i className="fa-solid fa-rotate-left" style={{ marginRight: '8px' }}></i>
+                    Clear
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn-back-to-login"
+                    onClick={goToLogin}
+                    disabled={loading}
+                  >
+                    <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i>
+                    Back to Login
                   </button>
                 </div>
               </div>
