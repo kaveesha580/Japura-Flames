@@ -167,6 +167,14 @@ export function useRegistration() {
 
       if (response.ok) {
         setIsSubmitted(true);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userEmail', data.user.email);
+        localStorage.setItem('userName', data.user.fullName || formData.fullName);
+        localStorage.setItem('userPhone', data.user.phone || formData.phone);
+
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       } else {
         setServerError(data.message || 'Registration failed. Please try again.');
       }
