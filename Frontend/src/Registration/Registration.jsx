@@ -9,6 +9,9 @@ function Registration() {
     isSubmitted,
     loading,
     serverError,
+    emailChecking,
+    emailExists,
+    emailCheckMessage,
     handleChange,
     handleSubmit,
     handleReset,
@@ -82,8 +85,28 @@ function Registration() {
                       disabled={loading}
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
+
+                   {/* Email checking status */}
+                    {emailChecking && (
+                      <span className="input-status checking">
+                        <i className="fa-solid fa-spinner fa-spin"></i> Checking...
+                      </span>
+                    )}
+                    {!emailChecking && formData.email && !errors.email && emailExists && (
+                      <span className="input-status error">
+                        <i className="fa-solid fa-times-circle"></i> Already registered
+                      </span>
+                    )}
+                    {!emailChecking && formData.email && !errors.email && !emailExists && (
+                      <span className="input-status success">
+                        <i className="fa-solid fa-check-circle"></i> Available
+                      </span>
+                    )}
                   </div>
                   {errors.email && <span className="error-message">{errors.email}</span>}
+                  {!errors.email && emailCheckMessage && !emailExists && (
+                    <span className="success-message">{emailCheckMessage}</span>
+                  )}
                 </div>
 
                 {/* Phone */}
@@ -185,7 +208,7 @@ function Registration() {
                 )}
 
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
-                  <button type="submit" className="btn-submit" disabled={loading}>
+                  <button type="submit" className="btn-submit" disabled={loading || emailChecking || emailExists}>
                     {loading ? (
                       <>
                         <i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>

@@ -18,6 +18,62 @@ export function useRegistration() {
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
 
+    // Email check state
+  const [emailChecking, setEmailChecking] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
+  const [emailCheckMessage, setEmailCheckMessage] = useState('');
+
+  // Check when the email changes
+  useEffect(() => {
+    const checkEmail = async () => {
+      const email = formData.email.trim();
+
+      if (!email || !/\S+@\S+\.\S+/.test(email)) {
+        setEmailExists(false);
+        setEmailCheckMessage('');
+        return;
+      }
+
+      setEmailChecking(true);
+
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/auth/check-email?email=${encodeURIComponent(email)}`
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setEmailExists(data.exists);
+          setEmailCheckMessage(data.message);
+
+          if (data.exists) {
+            setErrors(prev => ({
+              ...prev,
+              email: 'This email is already registered. Please use a different email.'
+            }));
+          } else {
+            setErrors(prev => ({
+              ...prev,
+              email: ''
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error checking email:', error);
+      } finally {
+        setEmailChecking(false);
+      }
+    };
+
+    // 500ms delay - don't make too many requests while typing
+    const timer = setTimeout(() => {
+      checkEmail();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [formData.email]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -45,6 +101,8 @@ export function useRegistration() {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
+    } else if (emailExists) {
+      newErrors.email = 'This email is already registered. Please use a different email.';
     }
 
     if (!formData.phone.trim()) {
@@ -71,6 +129,15 @@ export function useRegistration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (emailExists) {
+      setErrors(prev => ({
+        ...prev,
+        email: 'This email is already registered. Please use a different email.'
+      }));
+      return;
+    }
+
     if (!validateForm()) {
       return;
     }
@@ -123,6 +190,8 @@ export function useRegistration() {
     });
     setErrors({});
     setServerError('');
+    setEmailExists(false);
+    setEmailCheckMessage('');
   };
 
   const goToLogin = () => {
@@ -135,6 +204,9 @@ export function useRegistration() {
     isSubmitted,
     loading,
     serverError,
+    emailChecking,
+    emailExists,
+    emailCheckMessage,
     handleChange,
     handleSubmit,
     handleReset,
