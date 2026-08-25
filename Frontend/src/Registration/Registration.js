@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function useRegistration() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -18,12 +19,12 @@ export function useRegistration() {
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
 
-    // Email check state
+  // 🟢 Email check state
   const [emailChecking, setEmailChecking] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [emailCheckMessage, setEmailCheckMessage] = useState('');
 
-  // Check when the email changes
+  // 🟢 Email එක change වෙද්දි check කරන්න
   useEffect(() => {
     const checkEmail = async () => {
       const email = formData.email.trim();
@@ -66,7 +67,7 @@ export function useRegistration() {
       }
     };
 
-    // 500ms delay - don't make too many requests while typing
+    // 500ms delay - type කරද්දි ගොඩක් requests යන්න එපා
     const timer = setTimeout(() => {
       checkEmail();
     }, 500);
@@ -81,7 +82,6 @@ export function useRegistration() {
       [name]: value
     }));
 
-  // Clear the error in the field
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
