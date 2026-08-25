@@ -348,3 +348,148 @@ html {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(180deg, rgba(242, 177, 60, 0.10), rgba(255, 255, 255, 0.95));
+  color: var(--text-dark);
+  margin-top: 40px;
+  border-top: 1px solid rgba(242, 177, 60, 0.25);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.socials a {
+  color: var(--secondary);
+  font-size: 22px;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(242, 177, 60, 0.12);
+  border: 1px solid rgba(242, 177, 60, 0.25);
+  text-decoration: none;
+}
+
+.socials a:hover {
+  color: var(--primary-dark);
+  transform: translateY(-5px);
+  background: rgba(242, 177, 60, 0.25);
+}
+
+.socials a i {
+  width: 100%;
+  text-align: center;
+}
+
+.socials a:nth-child(1):hover { color: #1877f2; }
+.socials a:nth-child(2):hover { color: #e4405f; }
+.socials a:nth-child(3):hover { color: #ff0000; }
+.socials a:nth-child(4):hover { color: #69c9d0; }
+
+footer p {
+  color: #6e2e00;
+  font-size: 14px;
+}
+
+/* ============================================
+   ANIMATED LOGO
+   ============================================ */
+.animatedLogoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.logoBorderWrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 136, 0, 0.31);
+}
+
+.logoBorderWrapper::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, transparent, transparent, #ff8a00, #e52e71, transparent);
+  animation: spin 2.5s linear infinite;
+}
+
+.logoBorderWrapper::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: #0f2027;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.myCustomLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== EMAIL CHECK STATUS ===== */
+.input-status {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-status.checking { color: #ff9800; }
+.input-status.success { color: #4CAF50; }
+.input-status.error { color: #f44336; }
+.input-status i { font-size: 14px; }
+
+.success-message {
+  color: #4CAF50;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+.input-with-icon .form-input {
+  padding-right: 80px;
+}
+
+.input-with-icon .input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
