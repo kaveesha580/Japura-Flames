@@ -73,3 +73,46 @@
 }
 
 
+/* ------------------------*/
+/*  Form input style */
+/* ------------------------*/
+.loginForm {
+  background-color: transparent;
+}
+
+.loginForm .inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.inputGroup label {
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.inputGroup input {
+  background: rgba(245, 242, 242, 0.048);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 15px;
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.inputGroup input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.inputGroup input:focus {
+  border-color: #947c61;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(255, 138, 0, 0.3);
+}
