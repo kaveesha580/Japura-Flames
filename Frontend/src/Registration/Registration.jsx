@@ -9,6 +9,9 @@ function Registration() {
     isSubmitted,
     loading,
     serverError,
+    emailChecking,
+    emailExists,
+    emailCheckMessage,
     handleChange,
     handleSubmit,
     handleReset,
@@ -36,7 +39,9 @@ function Registration() {
               {serverError}
             </div>
           )}
-          <form id="eventRegistrationForm" noValidate>
+
+          {!isSubmitted ? (
+            <form id="eventRegistrationForm" onSubmit={handleSubmit} noValidate>
             <div style={{ marginTop: '30px', paddingTop: '25px', borderTop: '1px solid #ddd' }}>
               <div className="section-title">
                 <span className="section-number"></span>
@@ -82,8 +87,28 @@ function Registration() {
                       disabled={loading}
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
+
+                    {/* 🟢 Email checking status */}
+                    {emailChecking && (
+                      <span className="input-status checking">
+                        <i className="fa-solid fa-spinner fa-spin"></i> Checking...
+                      </span>
+                    )}
+                    {!emailChecking && formData.email && !errors.email && emailExists && (
+                      <span className="input-status error">
+                        <i className="fa-solid fa-times-circle"></i> Already registered
+                      </span>
+                    )}
+                    {!emailChecking && formData.email && !errors.email && !emailExists && (
+                      <span className="input-status success">
+                        <i className="fa-solid fa-check-circle"></i> Available
+                      </span>
+                    )}
                   </div>
                   {errors.email && <span className="error-message">{errors.email}</span>}
+                  {!errors.email && emailCheckMessage && !emailExists && (
+                    <span className="success-message">{emailCheckMessage}</span>
+                  )}
                 </div>
 
                 {/* Phone */}
@@ -133,7 +158,7 @@ function Registration() {
                   <label className="form-label">
                     Confirm Password <span className="required-star">*</span>
                   </label>
-                   <div className={`input-with-icon ${errors.confirmPassword ? 'has-error' : ''}`}>
+                  <div className={`input-with-icon ${errors.confirmPassword ? 'has-error' : ''}`}>
                     <input
                       type="password"
                       name="confirmPassword"
@@ -185,7 +210,11 @@ function Registration() {
                 )}
 
                 <div className="submit-section" style={{ gridColumn: '1 / -1' }}>
-                  <button type="submit" className="btn-submit" disabled={loading}>
+                  <button
+                    type="submit"
+                    className="btn-submit"
+                    disabled={loading || emailChecking || emailExists}
+                  >
                     {loading ? (
                       <>
                         <i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>
@@ -222,7 +251,33 @@ function Registration() {
               </div>
             </div>
           </form>
+          ) : (
+            <div className="success-message">
+              <i className="fa-solid fa-check-circle"></i>
+              <h2>Registration Successful!</h2>
+              <p>Welcome to J'Pura Flames!</p>
+            </div>
+          )}
         </div>
+
+
+        <footer>
+          <div className="socials">
+            <a href="https://www.facebook.com/share/1DDVufvkJb/" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/jpura_flames?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@Japuraflames" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.tiktok.com/@japuraflames" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-tiktok"></i>
+            </a>
+          </div>
+          <p>© 2026 Japuraflames. All Rights Reserved.</p>
+        </footer>
       </div>
     </div>
   );
