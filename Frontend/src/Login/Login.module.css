@@ -116,3 +116,32 @@
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 10px rgba(255, 138, 0, 0.3);
 }
+
+/* ------------------------*/
+/*  Password toggle icon  style */
+/* ------------------------*/
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInputContainer input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.passwordToggleIcon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.passwordToggleIcon:hover {
+  color: #ff8a00;
+}
