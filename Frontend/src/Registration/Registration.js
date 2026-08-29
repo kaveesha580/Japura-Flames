@@ -19,12 +19,12 @@ export function useRegistration() {
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
 
-  // 🟢 Email check state
+  //  Email check state
   const [emailChecking, setEmailChecking] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [emailCheckMessage, setEmailCheckMessage] = useState('');
 
-  // 🟢 Email එක change වෙද්දි check කරන්න
+  // Check when the email is being changed
   useEffect(() => {
     const checkEmail = async () => {
       const email = formData.email.trim();
@@ -67,7 +67,7 @@ export function useRegistration() {
       }
     };
 
-    // 500ms delay - type කරද්දි ගොඩක් requests යන්න එපා
+    // 500ms delay – to prevent too many requests from being sent while typing.
     const timer = setTimeout(() => {
       checkEmail();
     }, 500);

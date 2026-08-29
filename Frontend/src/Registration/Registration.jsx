@@ -88,7 +88,7 @@ function Registration() {
                     />
                     <i className="fa-solid fa-envelope input-icon"></i>
 
-                    {/* 🟢 Email checking status */}
+                    {/* Email checking status */}
                     {emailChecking && (
                       <span className="input-status checking">
                         <i className="fa-solid fa-spinner fa-spin"></i> Checking...
