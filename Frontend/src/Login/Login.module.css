@@ -145,3 +145,110 @@
 .passwordToggleIcon:hover {
   color: #ff8a00;
 }
+
+/* ------------------------*/
+/*  Form Actions */
+/* ------------------------*/
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  font-size: 13px;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.rememberMe input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #ff8a00;
+  cursor: pointer;
+}
+
+.forgotPassword {
+  color: #ff8a00;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.forgotPassword:hover {
+  color: #e52e71;
+}
+/*-----------------------*/
+/* Login Button          */
+/*-----------------------*/
+
+.loginBtn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff8a00, #e52e71) !important;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.loginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(229, 46, 113, 0.4);
+}
+
+.loginBtn:active {
+  transform: translateY(1px);
+}
+/* -------------------------*/
+/* Divider                  */
+/*--------------------------*/
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+/*----------------------------*/
+/* Create Account Button      */
+/*----------------------------*/
+.createAccountBtn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid #ff8a00;
+  border-radius: 8px;
+  color: #ff8a00;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.createAccountBtn:hover {
+  background: rgba(255, 138, 0, 0.1);
+  box-shadow: 0 0 15px rgba(255, 138, 0, 0.3);
+}
