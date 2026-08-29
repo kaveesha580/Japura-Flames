@@ -21,6 +21,15 @@ const Login = () => {
    const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+
+
+
+   //* Go to Registration //
+  const goToRegistration = () => {
+    navigate('/register');
+  };
+
   return (
     <div className={styles.loginContainer}>
      {/* Added glass card and header section */}
@@ -73,6 +82,32 @@ const Login = () => {
                 </span>
               </div>
               </div>
+
+              {/* Form Actions and Button */}
+              <div className={styles.formActions}>
+              <label className={styles.rememberMe}>
+                <input type="checkbox" /> Remember me
+              </label>
+              <a href="#" className={styles.forgotPassword} onClick={switchToForgotView}>
+                Forgot Password?
+              </a>
+            </div>
+            
+            <button type="submit" className={styles.loginBtn} disabled={loading}>
+              {loading ? 'Logging in...' : 'Log In'}
+            </button>
+
+            <div className={styles.divider}>
+              <span>OR</span>
+            </div>
+
+            <button 
+              type="button" 
+              className={styles.createAccountBtn}
+              onClick={goToRegistration}
+            >
+              Create an Account
+            </button>
             </form>
           
         </div>
