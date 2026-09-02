@@ -13,6 +13,11 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
+
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -20,6 +25,72 @@ const Login = () => {
    // * Password toggle state //
    const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+//* Handle Login   //
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    setLoading(true);
+    
+    // *Frontend Validation  //
+    if (!formData.email) {
+      setError('Please enter your email address');
+      setLoading(false);
+      return;
+    }
+    
+    if (!formData.password) {
+      setError('Please enter your password');
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        email: formData.email,
+        password: formData.password
+      });
+
+      console.log('Login Response:', res.data);
+      
+      if (res.data.success) {
+        setSuccess(res.data.message || 'Login Successful!');
+        
+        
+        const user = res.data.user || {};
+        
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userEmail', user.email || formData.email);
+        localStorage.setItem('userId', user.id || '');
+        localStorage.setItem('userName', user.fullName || formData.email.split('@')[0]); // 🟢 Fix: res.data.user.fullName
+        localStorage.setItem('userPhone', user.phone || '');
+        
+        console.log('Token saved:', res.data.token);
+        console.log('User Email:', user.email || formData.email);
+        console.log('User Name:', user.fullName || formData.email.split('@')[0]);
+        
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+      } else {
+        setError(res.data.message || 'Login failed');
+      }
+
+      } catch (err) {
+      console.error('Login Error:', err);
+      
+      if (err.response) {
+        setError(err.response.data?.message || 'Login failed. Please check your credentials.');
+      } else if (err.request) {
+        setError('Cannot connect to server. Please check your connection.');
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
 
