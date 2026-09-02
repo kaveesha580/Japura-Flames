@@ -37,6 +37,50 @@ router.post('/login', async (req, res) => {
         message: 'Account is deactivated. Please contact support.'
       });
     }
+
+    {/*Password comparison and JWT token generation */}
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid Credentials'
+      });
+    }
+
+    await User.updateLastLogin(user._id);
+
+    const payload = {
+      user: {
+        id: user._id,
+        email: user.email,
+        accountType: user.accountType
+      }
+    };
+
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET || 'your_secret_key',
+      { expiresIn: '7d' }
+    );
+
+     const userData = await User.getProfile(user._id);
+
+    console.log(`✅ User logged in: ${email}`);
+
+    res.json({
+      success: true,
+      token,
+      message: 'Login Successful!',
+      user: {
+        id: userData._id,
+        email: userData.email,
+        fullName: userData.fullName,  
+        phone: userData.phone,
+        accountType: userData.accountType,
+        organization: userData.organization
+      }
+    });
+
     } catch (err) {
     console.error('❌ Login Error:', err.message);
     res.status(500).json({
