@@ -109,7 +109,11 @@ const Login = () => {
           <h2 className={styles.title}>Japura Flames</h2>
           <p className={styles.subtitle}>Welcome back! Please login to your account.</p>
         </div>
-      
+
+         {/* status messages UI */}
+       {error && <div className={styles.errorMessage}>{error}</div>}
+       {success && <div className={styles.successMessage}>{success}</div>}
+
 
    <form onSubmit={handleLoginSubmit} className={styles.loginForm}>
             <div className={styles.inputGroup}>
