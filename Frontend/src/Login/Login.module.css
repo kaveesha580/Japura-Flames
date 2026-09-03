@@ -71,6 +71,31 @@
   font-weight: 300;
   margin: 0;
 }
+/* ------------------------*/
+/*  Status Message Style */
+/* ------------------------*/
+
+.errorMessage {
+  background: rgba(255, 50, 50, 0.1);
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  color: #ff6b6b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.successMessage {
+  background: rgba(50, 255, 50, 0.1);
+  border: 1px solid rgba(50, 255, 50, 0.3);
+  color: #4cd137;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
 
 
 /* ------------------------*/
