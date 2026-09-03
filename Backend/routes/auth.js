@@ -188,3 +188,125 @@ router.post('/register', async (req, res) => {
     });
   }
 });
+
+//-------------------------------------
+// *POST /api/auth/me -Get current User
+//-------------------------------------
+
+router.get('/me', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: 'No token provided'
+      });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_secret_key');
+
+    const user = await User.getProfile(decoded.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      user: {
+        id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        phone: user.phone,
+        accountType: user.accountType,
+        organization: user.organization
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Get User Error:', error.message);
+    
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid token'
+      });
+    }
+    
+    res.status(500).json({
+      success: false,
+      message: 'Server Error'
+    });
+  }
+});
+
+//-------------------------------------------------
+// *POST /api/auth/me -Update current user profile
+//-------------------------------------------------
+router.put('/me', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: 'No token provided'
+      });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_secret_key');
+    const { fullName, phone } = req.body;
+
+    if (!fullName || !phone) {
+      return res.status(400).json({
+        success: false,
+        message: 'Full name and phone are required'
+      });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      decoded.user.id,
+      { fullName: fullName.trim(), phone: phone.trim() },
+      { new: true, select: '-password' }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: {
+        id: updatedUser._id,
+        email: updatedUser.email,
+        fullName: updatedUser.fullName,
+        phone: updatedUser.phone,
+        accountType: updatedUser.accountType,
+        organization: updatedUser.organization
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Update Profile Error:', error.message);
+
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid token'
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Server Error'
+    });
+  }
+});
