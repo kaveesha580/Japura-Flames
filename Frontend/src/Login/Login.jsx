@@ -12,6 +12,13 @@ const Login = () => {
   // * Form state //
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [isForgotView, setIsForgotView] = useState(false);
+  const [resetData, setResetData] = useState({ 
+    email: '', 
+    oldPassword: '', 
+    newPassword: '', 
+    confirmPassword: '' 
+  });
 
 
   const [error, setError] = useState('');
@@ -21,7 +28,9 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const handleForgotPhoneChange = (e) => {
+    setForgotPhoneData({ ...forgotPhoneData, [e.target.name]: e.target.value });
+  };
    // * Password toggle state //
    const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -93,7 +102,18 @@ const Login = () => {
     }
   };
 
+  const switchToForgotView = (e) => {
+    e.preventDefault();
+    setIsForgotView(true);
+    setError('');
+    setSuccess('');
+  };
 
+  const switchToLoginView = () => {
+    setIsForgotView(false);
+    setError('');
+    setSuccess('');
+  };
 
 
    //* Go to Registration //
