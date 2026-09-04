@@ -403,3 +403,60 @@ router.put('/me', async (req, res) => {
     });
   }
 });
+
+//-------------------------------------------------
+// *POST /api/auth/users - Get All Users
+//-------------------------------------------------
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.getAllUsers();
+
+    res.json({
+      success: true,
+      count: users.length,
+      users
+    });
+
+  } catch (error) {
+    console.error('❌ Get Users Error:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get users'
+    });
+  }
+});
+
+//-------------------------------------------------
+// *POST /api/auth/email - Check if email exist
+//-------------------------------------------------
+router.get('/check-email', async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
+      });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    
+    const exists = !!user;
+
+    res.json({
+      success: true,
+      exists: exists,
+      message: exists ? 'Email already registered' : 'Email is available'
+    });
+
+  } catch (error) {
+    console.error('❌ Check Email Error:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error'
+    });
+  }
+});
+
+module.exports = router;
