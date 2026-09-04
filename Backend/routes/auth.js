@@ -188,6 +188,62 @@ router.post('/register', async (req, res) => {
     });
   }
 });
+//-------------------------------------
+// *POST /api/auth/reset - password
+//-------------------------------------
+
+router.post('/reset-password', async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+
+  try {
+    if (!email || !oldPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'All fields are required'
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'New password must be at least 6 characters'
+      });
+    }
+
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User with this email does not exist.'
+      });
+    }
+
+    const isMatch = await user.comparePassword(oldPassword);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: 'Incorrect old password.'
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    console.log(`✅ Password reset for: ${email}`);
+
+    res.json({
+      success: true,
+      message: 'Password has been successfully changed! You can now login.'
+    });
+
+  } catch (err) {
+    console.error('❌ Password Reset Error:', err.message);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error'
+    });
+  }
+});
 
 //-------------------------------------
 // *POST /api/auth/me -Get current User
