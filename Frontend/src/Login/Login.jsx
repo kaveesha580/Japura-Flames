@@ -20,13 +20,16 @@ const Login = () => {
     confirmPassword: '' 
   });
 
-
+  const [forgotPhoneData, setForgotPhoneData] = useState({ email: '', phone: '', newPassword: '', confirmPassword: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleResetChange = (e) => {
+    setResetData({ ...resetData, [e.target.name]: e.target.value });
   };
   const handleForgotPhoneChange = (e) => {
     setForgotPhoneData({ ...forgotPhoneData, [e.target.name]: e.target.value });
@@ -102,6 +105,51 @@ const Login = () => {
     }
   };
 
+  //*Handle Password Reset *//
+  const handleResetSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (!resetData.email) {
+      return setError('Please enter your email address');
+    }
+    if (!resetData.oldPassword) {
+      return setError('Please enter your old password');
+    }
+    if (!resetData.newPassword) {
+      return setError('Please enter a new password');
+    }
+    if (resetData.newPassword.length < 6) {
+      return setError('New password must be at least 6 characters');
+    }
+    if (resetData.newPassword !== resetData.confirmPassword) {
+      return setError('New passwords do not match!');
+    }
+    
+    try {
+      const payload = {
+        email: resetData.email,
+        oldPassword: resetData.oldPassword,
+        newPassword: resetData.newPassword
+      };
+      const res = await axios.post('http://localhost:5000/api/auth/reset-password', payload);
+      
+      if (res.data.success) {
+        setSuccess(res.data.message);
+        setResetData({ email: '', oldPassword: '', newPassword: '', confirmPassword: '' });
+        
+        setTimeout(() => {
+          setIsForgotView(false);
+        }, 2000);
+      } else {
+        setError(res.data.message);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to change password.');
+    }
+  };
+
   const switchToForgotView = (e) => {
     e.preventDefault();
     setIsForgotView(true);
@@ -115,6 +163,10 @@ const Login = () => {
     setSuccess('');
   };
 
+ // Go to Home
+  const goToHome = () => {
+    navigate('/');
+  };
 
    //* Go to Registration //
   const goToRegistration = () => {
@@ -123,9 +175,22 @@ const Login = () => {
 
   return (
     <div className={styles.loginContainer}>
+    {/* Back to Home Button */}
+      <button className={styles.backHomeBtn} onClick={goToHome}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Home
+      </button>
+
      {/* Added glass card and header section */}
      <div className={styles.loginGlassCard}>
         <div className={styles.loginHeader}>
+          <div className={styles.animatedLogoContainer}>
+            <div className={styles.logoBorderWrapper}>
+              <img src={myLogo} alt="Japura Flames Logo" className={styles.myCustomLogo} />
+            </div>
+          </div>
           <h2 className={styles.title}>Japura Flames</h2>
           <p className={styles.subtitle}>
             {isForgotView ? "Reset your password" : "Welcome back! Please login to your account."}
@@ -137,6 +202,7 @@ const Login = () => {
        {success && <div className={styles.successMessage}>{success}</div>}
 
   {!isForgotView ? (
+    //* Login form *//
    <form onSubmit={handleLoginSubmit} className={styles.loginForm}>
             <div className={styles.inputGroup}>
               <label htmlFor="email">Email</label>
