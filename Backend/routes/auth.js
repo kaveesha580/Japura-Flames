@@ -246,6 +246,43 @@ router.post('/reset-password', async (req, res) => {
 });
 
 //-------------------------------------
+// *POST /api/auth/forgot-by-phone
+//-------------------------------------
+router.post('/forgot-by-phone', async (req, res) => {
+  try {
+    const { email, phone, newPassword } = req.body;
+
+    if (!email || !phone || !newPassword) {
+      return res.status(400).json({ success: false, message: 'Email, phone and newPassword are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ success: false, message: 'New password must be at least 6 characters' });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User with this email does not exist' });
+    }
+
+    if (!user.phone || user.phone.trim() !== phone.trim()) {
+      return res.status(400).json({ success: false, message: 'Phone number does not match the provided email' });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    console.log(`✅ Password reset by phone for: ${email}`);
+
+    res.json({ success: true, message: 'Password has been reset successfully. You can now login.' });
+
+  } catch (error) {
+    console.error('❌ Forgot By Phone Error:', error.message);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+});
+
+//-------------------------------------
 // *POST /api/auth/me -Get current User
 //-------------------------------------
 
