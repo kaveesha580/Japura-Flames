@@ -30,6 +30,110 @@ html,
 body {
   animation: pageFadeIn 0.8s ease forwards;
 }
+
+/*KEYFRAMES */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slowFloat {/*animation: slowFloat 4s ease-in-out infinite;*/
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes slowZoom {/*animation: slowZoom 6s ease-in-out infinite;*/
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slideFromTop {
+  0% {/*animation: slideFromTop 1.5s ease-out forwards;*/
+    transform: translateY(-100%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 /* ------Home----- */
 .home {
   position: relative;
@@ -79,10 +183,10 @@ body {
   color: var(--white-color);
   font-size: 3rem;
   font-weight: 800;
-
   letter-spacing: 2px;
   text-align: center;
   padding-top:2rem;
+  animation: slideFromTop 1.5s ease-out forwards;
   
 }
 
@@ -115,7 +219,7 @@ body {
   flex-direction: column;
   opacity: 0;
   transform: translateY(24px);
-  animation: fadeInUp 0.9s ease-out 0.2s forwards;
+  animation: slideFromTop 1s ease-out forwards;
 }
 
 .home .home-text .line1 {
@@ -126,7 +230,7 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   opacity: 1;
-  animation: fadeInUp 0.9s ease-out 0.35s forwards;
+  animation: slideFromTop 2s ease-out forwards;
 }
 
 
@@ -138,7 +242,7 @@ body {
   text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
   line-height: 1.2;
   opacity: 1;
-  animation: fadeInUp 0.9s ease-out 0.5s forwards;
+  animation: slideFromTop 2.5s ease-out forwards;
 }
 
 
@@ -150,7 +254,7 @@ body {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
   line-height: 1.7;
   opacity: 1;
-  animation: fadeInUp 0.9s ease-out 0.65s forwards;
+ animation: slideFromTop 3s ease-out forwards;
 }
 
 .hero-actions {
@@ -158,8 +262,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  opacity: 1;
-  animation: fadeInUp 0.9s ease-out 0.8s forwards;
+ 
 }
 
  
@@ -215,6 +318,47 @@ body {
   border-color: rgba(255, 98, 1, 0.8);
 }
 
+/* SERVICES line*/
+
+.home-services {
+  align-items: center;
+  background: #140b07;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+  color: var(--white-color);
+  justify-content: center;
+  padding: 1.15rem 2rem;
+  width: auto;
+  
+}
+.services-label {
+  display: flex;  
+  gap: 1.5rem 4rem;
+  animation: scrollLeft 15s linear infinite;
+}
+
+.home-services span {
+  align-items: center;
+  display: inline-flex;
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  
+}
+
+
+.home-services span::before {
+  background: var(--white-color);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 5px #140b07;
+  content: "";
+  display: inline-block;
+  height: 1.1rem;
+  margin-right: 0.7rem;
+  width: 1.1rem;
+}
+
+/* HEADER  */
 
 header {
   background-color: var(--dark-bg);
