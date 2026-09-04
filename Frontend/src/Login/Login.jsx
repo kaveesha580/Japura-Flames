@@ -127,14 +127,16 @@ const Login = () => {
      <div className={styles.loginGlassCard}>
         <div className={styles.loginHeader}>
           <h2 className={styles.title}>Japura Flames</h2>
-          <p className={styles.subtitle}>Welcome back! Please login to your account.</p>
+          <p className={styles.subtitle}>
+            {isForgotView ? "Reset your password" : "Welcome back! Please login to your account."}
+          </p>
         </div>
 
          {/* status messages UI */}
        {error && <div className={styles.errorMessage}>{error}</div>}
        {success && <div className={styles.successMessage}>{success}</div>}
 
-
+  {!isForgotView ? (
    <form onSubmit={handleLoginSubmit} className={styles.loginForm}>
             <div className={styles.inputGroup}>
               <label htmlFor="email">Email</label>
@@ -204,7 +206,57 @@ const Login = () => {
               Create an Account
             </button>
             </form>
-          
+          ) : (
+          /* FORGOT PASSWORD  */
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            setError(''); setSuccess('');
+            const { email, phone, newPassword, confirmPassword } = forgotPhoneData;
+            if (!email) return setError('Please enter your email');
+            if (!phone) return setError('Please enter your phone number');
+            if (!newPassword) return setError('Please enter a new password');
+            if (newPassword.length < 6) return setError('Password must be at least 6 characters');
+            if (newPassword !== confirmPassword) return setError('Passwords do not match');
+
+            try {
+              const res = await axios.post('http://localhost:5000/api/auth/forgot-by-phone', { email, phone, newPassword });
+              if (res.data.success) {
+                setSuccess(res.data.message || 'Password reset successfully');
+                setForgotPhoneData({ email: '', phone: '', newPassword: '', confirmPassword: '' });
+                setTimeout(() => setIsForgotView(false), 1500);
+              } else {
+                setError(res.data.message || 'Failed to reset password');
+              }
+            } catch (err) {
+              setError(err.response?.data?.message || 'Server error');
+            }
+          }} className={styles.loginForm}>
+            <div className={styles.inputGroup}>
+              <label>Email Address</label>
+              <input type="email" name="email" value={forgotPhoneData.email} onChange={handleForgotPhoneChange} placeholder="name@example.com" required />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Phone Number</label>
+              <input type="text" name="phone" value={forgotPhoneData.phone} onChange={handleForgotPhoneChange} placeholder="07XXXXXXXX" required />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>New Password</label>
+              <input type="password" name="newPassword" value={forgotPhoneData.newPassword} onChange={handleForgotPhoneChange} required />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Confirm New Password</label>
+              <input type="password" name="confirmPassword" value={forgotPhoneData.confirmPassword} onChange={handleForgotPhoneChange} required />
+            </div>
+
+            <div style={{display: 'flex', gap: 8}}>
+              <button type="submit" className={styles.loginBtn}>Reset Password</button>
+              <button type="button" className={styles.createAccountBtn} onClick={switchToLoginView}>Back to Login</button>
+            </div>
+          </form>
+        )}
         </div>
     </div>
   );
