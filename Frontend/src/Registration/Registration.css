@@ -130,13 +130,10 @@ html {
   transform: translateX(calc(100% + 50px));
 }
 
-
 .accent-bar {
   height: 6px;
   background: linear-gradient(90deg, #6e2e00, #f2b13c, #6e2e00);
 }
-
-
 
 .header-section {
   text-align: center;
@@ -624,8 +621,6 @@ h4 {
   }
 }
 
-
-
 /* Focus visible for keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--primary);
@@ -894,7 +889,6 @@ h4 {
   transform: translateY(-50%);
   color: #999;
 }
-
 
 .btn-submit:disabled {
   opacity: 0.6;
