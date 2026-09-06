@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  import React, { useState, useEffect } from 'react';
+=======
+import React, { useState, useEffect } from 'react';
+>>>>>>> origin/chathurika
 import './Booking.css';
 
 const BOOKING_API_URL = 'http://localhost:5000/api/bookings';
@@ -45,6 +49,7 @@ function Booking() {
       }));
     }
   }, []);
+<<<<<<< HEAD
 
   // Service price list
   const servicePrices = {
@@ -385,6 +390,8 @@ function Booking() {
       </div>
     </div>
   );
+=======
+>>>>>>> origin/chathurika
 }
 
 export default Booking;
