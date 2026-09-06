@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+ import React, { useState, useEffect } from 'react';
+=======
 import React, { useState, useEffect } from 'react';
+>>>>>>> origin/chathurika
 import './Booking.css';
 
 const BOOKING_API_URL = 'http://localhost:5000/api/bookings';
@@ -45,9 +49,15 @@ function Booking() {
       }));
     }
   }, []);
+<<<<<<< HEAD
 
 
   
+=======
+<<<<<<< HEAD
+
+  // Service price list
+>>>>>>> chathurika
   const servicePrices = {
     'Photographer': { '2 Hours': 15000, '4 Hours': 25000, '6 Hours': 35000, '8 Hours': 45000, 'Full Day': 60000 },
     'Videographer': { '2 Hours': 20000, '4 Hours': 35000, '6 Hours': 50000, '8 Hours': 65000, 'Full Day': 85000 },
@@ -141,7 +151,257 @@ function Booking() {
     }
   };
 
+<<<<<<< HEAD
 
+=======
+  return (
+    <div className="booking-container">
+      <div className="booking-form-wrapper">
+        <h1>📸 Book Your Event Coverage</h1>
+        <p className="subtitle">Professional Photographer, Videographer & Broadcasting Services</p>
+
+        {message && (
+          <div className={`message ${success ? 'success' : 'error'}`}>
+            {message}
+          </div>
+        )}
+
+        {/* Logged in user info - Email display කරන්න */}
+        {userEmail && (
+          <div className="user-info-box">
+            <div className="user-info-icon">👤</div>
+            <div className="user-info-details">
+              <div className="user-info-label">Booking as:</div>
+              <div className="user-info-email">{userEmail}</div>
+              <div className="user-info-note">✓ You are logged in with this email</div>
+            </div>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          {/* ===== PERSONAL DETAILS ===== */}
+          <h3>👤 Personal Details</h3>
+          
+          <div className="form-group">
+            <label>Full Name *</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          {/* Email field එක සම්පූර්ණයෙන්ම අයින් කරලා */}
+
+          <div className="form-group">
+            <label>Phone Number *</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          {/* ===== EVENT DETAILS ===== */}
+          <h3>🎯 Event Details</h3>
+
+          <div className="form-group">
+            <label>Event Name *</label>
+            <input
+              type="text"
+              name="eventName"
+              value={formData.eventName}
+              onChange={handleChange}
+              required
+              placeholder="e.g., Wedding of John & Sarah, Tech Conference 2024"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Event Type *</label>
+            <select
+              name="eventType"
+              value={formData.eventType}
+              onChange={handleChange}
+              required
+            >
+              <option value="Wedding">💒 Wedding</option>
+              <option value="Party">🎉 Party</option>
+              <option value="Corporate">🏢 Corporate</option>
+              <option value="Concert">🎵 Concert</option>
+              <option value="Sports">⚽ Sports</option>
+              <option value="Other">📌 Other</option>
+            </select>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Event Date *</label>
+              <input
+                type="date"
+                name="eventDate"
+                value={formData.eventDate}
+                onChange={handleChange}
+                required
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+            <div className="form-group">
+              <label>Event Time *</label>
+              <input
+                type="time"
+                name="eventTime"
+                value={formData.eventTime}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Event Location *</label>
+            <input
+              type="text"
+              name="eventLocation"
+              value={formData.eventLocation}
+              onChange={handleChange}
+              required
+              placeholder="e.g., Hotel Galadari, Colombo"
+            />
+          </div>
+
+          {/* ===== SERVICE SELECTION ===== */}
+          <h3>📹 Select Service</h3>
+
+          <div className="service-cards">
+            <div 
+              className={`service-card ${formData.serviceType.includes('Photographer') ? 'active' : ''}`}
+              onClick={() => {
+                setFormData(prev => ({
+                  ...prev,
+                  serviceType: prev.serviceType.includes('Photographer')
+                    ? prev.serviceType.filter(s => s !== 'Photographer')
+                    : [...prev.serviceType, 'Photographer']
+                }));
+              }}
+            >
+              <div className="service-icon">📸</div>
+              <div className="service-name">Photographer</div>
+              <div className="service-price">From LKR 15,000</div>
+            </div>
+            
+            <div 
+              className={`service-card ${formData.serviceType.includes('Videographer') ? 'active' : ''}`}
+              onClick={() => {
+                setFormData(prev => ({
+                  ...prev,
+                  serviceType: prev.serviceType.includes('Videographer')
+                    ? prev.serviceType.filter(s => s !== 'Videographer')
+                    : [...prev.serviceType, 'Videographer']
+                }));
+              }}
+            >
+              <div className="service-icon">🎥</div>
+              <div className="service-name">Videographer</div>
+              <div className="service-price">From LKR 20,000</div>
+            </div>
+            
+            <div 
+              className={`service-card ${formData.serviceType.includes('Broadcaster') ? 'active' : ''}`}
+              onClick={() => {
+                setFormData(prev => ({
+                  ...prev,
+                  serviceType: prev.serviceType.includes('Broadcaster')
+                    ? prev.serviceType.filter(s => s !== 'Broadcaster')
+                    : [...prev.serviceType, 'Broadcaster']
+                }));
+              }}
+            >
+              <div className="service-icon">📡</div>
+              <div className="service-name">Broadcaster</div>
+              <div className="service-price">From LKR 25,000</div>
+            </div>
+            
+            <div 
+              className={`service-card ${formData.serviceType.includes('All') ? 'active' : ''}`}
+              onClick={() => {
+                setFormData(prev => ({
+                  ...prev,
+                  // If All is selected, reset to only All. Otherwise toggle All.
+                  serviceType: prev.serviceType.includes('All') ? [] : ['All']
+                }));
+              }}
+            >
+              <div className="service-icon">🌟</div>
+              <div className="service-name">All Services</div>
+              <div className="service-price">From LKR 40,000</div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Duration *</label>
+            <select
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              required
+            >
+              <option value="2 Hours">2 Hours</option>
+              <option value="4 Hours">4 Hours</option>
+              <option value="6 Hours">6 Hours</option>
+              <option value="8 Hours">8 Hours</option>
+              <option value="Full Day">Full Day</option>
+            </select>
+          </div>
+
+          {/* ===== PRICE ESTIMATE ===== */}
+          <div className="price-estimate">
+            <div className="price-label">💰 Estimated Price</div>
+            <div className="price-amount">LKR {getEstimatedPrice().toLocaleString()}</div>
+            <div className="price-note">* Final price may vary based on requirements</div>
+          </div>
+
+          {/* ===== ADDITIONAL DETAILS ===== */}
+          <h3>📝 Additional Details</h3>
+
+          <div className="form-group">
+            <label>Special Requirements</label>
+            <textarea
+              name="specialRequirements"
+              value={formData.specialRequirements}
+              onChange={handleChange}
+              rows="3"
+              placeholder="e.g., Drone coverage, Live streaming, Multiple cameras..."
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Message</label>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows="3"
+              placeholder="Any additional information about your event..."
+            />
+          </div>
+
+          <button type="submit" disabled={loading} className="submit-btn">
+            {loading ? '⏳ Submitting...' : '📅 Submit Booking Request'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+=======
+>>>>>>> origin/chathurika
+>>>>>>> chathurika
 }
 
 export default Booking;
