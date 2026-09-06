@@ -1,19 +1,11 @@
-import { useState } from 'react';
 import { useRegistration } from './Registration';
 import './Registration.css';
 
 function Registration() {
   const { formData, handleChange } = useRegistration();
 
-  const handleBackToLogin = () => {
-    if (isLeaving) return;
-
-    setIsLeaving(true);
-    window.setTimeout(goToLogin, 650);
-  };
-
   return (
-    <div className={`registration-page ${isLeaving ? 'is-leaving' : ''}`}>
+    <div className="registration-page">
       <div className="registration-image" role="img" aria-label="Japura Flames media team" />
       <div className="registration-container">
         <div className="accent-bar"></div>
