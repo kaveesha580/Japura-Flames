@@ -38,7 +38,7 @@ try {
 
 // 3. Bookings Routes
 try {
-  const bookingRoutes = require('./routes/bookings');
+  const bookingRoutes = require('./routes/booking');
   app.use('/api/bookings', bookingRoutes);
 } catch (err) {
   app.get('/api/bookings', (req, res) => {

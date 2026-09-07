@@ -1,4 +1,9 @@
 /* ===== BOOKING CONTAINER ===== */
+html,
+body {
+  overflow-x: hidden;
+}
+
 .booking-container {
   min-height: 100vh;
   padding: 40px 20px;
@@ -12,6 +17,20 @@
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 24px;
+  color: #b84b00;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-link:hover {
+  color: #7d3200;
+  text-decoration: underline;
 }
 
 .booking-form-wrapper h1 {
