@@ -1,17 +1,10 @@
-//-------------------------------------
-// * Router set up for authentication
-//-------------------------------------
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-//-------------------------------------
-// *POST /api/auth/login
-//-------------------------------------
 
-{/*Login route input validation */}
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -38,7 +31,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    {/*Password comparison and JWT token generation */}
+   
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({
@@ -63,9 +56,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-     const userData = await User.getProfile(user._id);
-
-    console.log(`✅ User logged in: ${email}`);
+    const userData = await User.getProfile(user._id);
 
     res.json({
       success: true,
@@ -74,15 +65,14 @@ router.post('/login', async (req, res) => {
       user: {
         id: userData._id,
         email: userData.email,
-        fullName: userData.fullName,  
+        fullName: userData.fullName,
         phone: userData.phone,
         accountType: userData.accountType,
         organization: userData.organization
       }
     });
 
-    } catch (err) {
-    console.error('❌ Login Error:', err.message);
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: 'Server Error'
@@ -90,9 +80,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-//-------------------------------------
-// *POST /api/auth/Register
-//-------------------------------------
 
 router.post('/register', async (req, res) => {
   const {
@@ -105,7 +92,6 @@ router.post('/register', async (req, res) => {
   } = req.body;
 
   try {
-    // 1. Validate input
     if (!fullName || !email || !phone || !password) {
       return res.status(400).json({
         success: false,
@@ -165,7 +151,7 @@ router.post('/register', async (req, res) => {
       user: {
         id: userData._id,
         email: userData.email,
-        fullName: userData.fullName,  // 🟢 Name එක add කරන්න
+        fullName: userData.fullName, 
         phone: userData.phone,
         accountType: userData.accountType,
         organization: userData.organization
@@ -173,7 +159,6 @@ router.post('/register', async (req, res) => {
     });
 
   } catch (err) {
-    console.error('❌ Registration Error:', err.message);
     
     if (err.code === 11000) {
       return res.status(409).json({
@@ -188,103 +173,58 @@ router.post('/register', async (req, res) => {
     });
   }
 });
-//-------------------------------------
-// *POST /api/auth/reset - password
-//-------------------------------------
 
-router.post('/reset-password', async (req, res) => {
-  const { email, oldPassword, newPassword } = req.body;
 
-  try {
-    if (!email || !oldPassword || !newPassword) {
-      return res.status(400).json({
-        success: false,
-        message: 'All fields are required'
-      });
-    }
-
-    if (newPassword.length < 6) {
-      return res.status(400).json({
-        success: false,
-        message: 'New password must be at least 6 characters'
-      });
-    }
-
-    const user = await User.findOne({ email }).select('+password');
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'User with this email does not exist.'
-      });
-    }
-
-    const isMatch = await user.comparePassword(oldPassword);
-    if (!isMatch) {
-      return res.status(400).json({
-        success: false,
-        message: 'Incorrect old password.'
-      });
-    }
-
-    user.password = newPassword;
-    await user.save();
-
-    console.log(`✅ Password reset for: ${email}`);
-
-    res.json({
-      success: true,
-      message: 'Password has been successfully changed! You can now login.'
-    });
-
-  } catch (err) {
-    console.error('❌ Password Reset Error:', err.message);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
-  }
-});
-
-//-------------------------------------
-// *POST /api/auth/forgot-by-phone
-//-------------------------------------
-router.post('/forgot-by-phone', async (req, res) => {
+router.post('/forgot-password', async (req, res) => {
   try {
     const { email, phone, newPassword } = req.body;
 
     if (!email || !phone || !newPassword) {
-      return res.status(400).json({ success: false, message: 'Email, phone and newPassword are required' });
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Email, phone and new password are required' 
+      });
     }
 
     if (newPassword.length < 6) {
-      return res.status(400).json({ success: false, message: 'New password must be at least 6 characters' });
+      return res.status(400).json({ 
+        success: false, 
+        message: 'New password must be at least 6 characters' 
+      });
     }
 
     const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User with this email does not exist' });
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User with this email does not exist' 
+      });
     }
 
+    // Phone number verification
     if (!user.phone || user.phone.trim() !== phone.trim()) {
-      return res.status(400).json({ success: false, message: 'Phone number does not match the provided email' });
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Phone number does not match the provided email' 
+      });
     }
 
     user.password = newPassword;
     await user.save();
 
-    console.log(`✅ Password reset by phone for: ${email}`);
-
-    res.json({ success: true, message: 'Password has been reset successfully. You can now login.' });
+    res.json({ 
+      success: true, 
+      message: 'Password has been reset successfully. You can now login.' 
+    });
 
   } catch (error) {
-    console.error('❌ Forgot By Phone Error:', error.message);
-    res.status(500).json({ success: false, message: 'Server Error' });
+    res.status(500).json({ 
+      success: false, 
+      message: 'Server Error' 
+    });
   }
 });
 
-//-------------------------------------
-// *POST /api/auth/me -Get current User
-//-------------------------------------
 
 router.get('/me', async (req, res) => {
   try {
@@ -321,7 +261,6 @@ router.get('/me', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ Get User Error:', error.message);
     
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({
@@ -337,9 +276,7 @@ router.get('/me', async (req, res) => {
   }
 });
 
-//-------------------------------------------------
-// *POST /api/auth/me -Update current user profile
-//-------------------------------------------------
+
 router.put('/me', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
@@ -363,7 +300,10 @@ router.put('/me', async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(
       decoded.user.id,
-      { fullName: fullName.trim(), phone: phone.trim() },
+      { 
+        fullName: fullName.trim(), 
+        phone: phone.trim() 
+      },
       { new: true, select: '-password' }
     );
 
@@ -388,7 +328,6 @@ router.put('/me', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ Update Profile Error:', error.message);
 
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({
@@ -404,9 +343,7 @@ router.put('/me', async (req, res) => {
   }
 });
 
-//-------------------------------------------------
-// *POST /api/auth/users - Get All Users
-//-------------------------------------------------
+
 router.get('/users', async (req, res) => {
   try {
     const users = await User.getAllUsers();
@@ -418,7 +355,6 @@ router.get('/users', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ Get Users Error:', error.message);
     res.status(500).json({
       success: false,
       message: 'Failed to get users'
@@ -426,9 +362,7 @@ router.get('/users', async (req, res) => {
   }
 });
 
-//-------------------------------------------------
-// *POST /api/auth/email - Check if email exist
-//-------------------------------------------------
+
 router.get('/check-email', async (req, res) => {
   try {
     const { email } = req.query;
@@ -451,12 +385,26 @@ router.get('/check-email', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ Check Email Error:', error.message);
     res.status(500).json({
       success: false,
       message: 'Server Error'
     });
   }
 });
+
+router.post('/admin-login', async (req, res) => {
+  const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({ success: false, message: 'Password is required' });
+  }
+
+  if (password === process.env.ADMIN_PASSWORD) {
+    return res.json({ success: true, message: 'Admin authenticated' });
+  }
+
+  return res.status(401).json({ success: false, message: 'Incorrect password' });
+});
+
 
 module.exports = router;
