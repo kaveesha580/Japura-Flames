@@ -20,6 +20,27 @@ A media showcase website for the Japura Flames media unit a place to display pro
 | Database   | MongoDB (Mongoose)                               |
 | Auth       | JWT + bcrypt                                     |
 
+## Dependencies
+
+### Frontend
+
+- `react` and `react-dom` : build the user interface
+- `react-router-dom` : client-side routing
+- `react-icons` : interface icons
+- `swiper` : sliders and carousels
+- `vite` : development server and production builds
+- `oxlint` : code linting
+
+### Backend
+
+- `express` : API server
+- `mongoose` : MongoDB object modeling
+- `cors` : cross-origin API access
+- `dotenv` : environment variable loading
+- `jsonwebtoken` : authentication tokens
+- `bcryptjs` : password hashing
+- `nodemon` : automatic server restarts during development
+
 ## Structure
 
 ```
