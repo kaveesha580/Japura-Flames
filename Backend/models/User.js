@@ -64,13 +64,11 @@ UserSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Static methods
 UserSchema.statics.emailExists = async function(email) {
   const user = await this.findOne({ email });
   return !!user;
 };
 
-//Removed the `usernameExists` method as well (it is not needed)
 UserSchema.statics.getProfile = async function(id) {
   return await this.findById(id).select('-password');
 };
