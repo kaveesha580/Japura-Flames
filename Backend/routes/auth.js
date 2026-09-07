@@ -31,6 +31,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
+   
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({
@@ -105,6 +106,7 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    // 2. Check if email already exists
     const emailExists = await User.emailExists(email);
     if (emailExists) {
       return res.status(409).json({
@@ -113,6 +115,7 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    // 3. Create new user
     const user = new User({
       fullName,
       email,
@@ -124,6 +127,7 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
+    // 4. Generate JWT Token
     const token = jwt.sign(
       {
         user: {
@@ -138,6 +142,8 @@ router.post('/register', async (req, res) => {
 
     const userData = await User.getProfile(user._id);
 
+    console.log(`✅ User registered: ${email} (ID: ${user._id})`);
+
     res.status(201).json({
       success: true,
       message: 'Registration successful!',
@@ -145,7 +151,7 @@ router.post('/register', async (req, res) => {
       user: {
         id: userData._id,
         email: userData.email,
-        fullName: userData.fullName,
+        fullName: userData.fullName, 
         phone: userData.phone,
         accountType: userData.accountType,
         organization: userData.organization
