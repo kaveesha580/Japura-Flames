@@ -90,9 +90,10 @@ router.post('/register', async (req, res) => {
     accountType,
     organization
   } = req.body;
+  const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
   try {
-    if (!fullName || !email || !phone || !password) {
+    if (!fullName || !normalizedEmail || !phone || !password) {
       return res.status(400).json({
         success: false,
         message: 'All required fields must be filled'
@@ -107,7 +108,7 @@ router.post('/register', async (req, res) => {
     }
 
     // 2. Check if email already exists
-    const emailExists = await User.emailExists(email);
+    const emailExists = await User.emailExists(normalizedEmail);
     if (emailExists) {
       return res.status(409).json({
         success: false,
@@ -118,7 +119,7 @@ router.post('/register', async (req, res) => {
     // 3. Create new user
     const user = new User({
       fullName,
-      email,
+      email: normalizedEmail,
       phone,
       password,
       accountType: accountType || 'personal',

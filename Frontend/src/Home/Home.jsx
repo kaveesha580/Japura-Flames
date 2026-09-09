@@ -800,7 +800,7 @@ function Home() {
       <div className="home reveal-section" id="home" ref={homeRef}>
         <div className="video-background">
           <video autoPlay muted loop playsInline>
-            <source src="/videos/home1.mp4" type="video/mp4" />
+            <source src="/videos/home1.webm" type="video/webm" />
           </video>
           <div className="video-overlay">
             <div className="logo">JAPURA FLAMES</div>
@@ -867,7 +867,7 @@ function Home() {
             </div>
             <div className="about-stats">
               <video className="bg-video" autoPlay muted loop playsInline>
-                <source src="/videos/home2.mp4" type="video/webm" />
+                <source src="/videos/home3.mp4" type="video/webm" />
               </video>
             </div>
           </div>
@@ -1101,7 +1101,7 @@ function Home() {
       <div className="projector-container" ref={projectorContainerRef}>
         <div className="vtop" ref={vtopRef}></div>
         <video autoPlay muted loop playsInline>
-          <source src="/videos/home2.mp4" type="video/webm" />
+          <source src="/videos/home.mp4" type="video/mp4" />
         </video>
       </div>
 

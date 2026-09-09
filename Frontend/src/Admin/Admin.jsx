@@ -701,26 +701,31 @@ function Admin() {
     const projectData = { ...formData };
 
     try {
+      let response;
       if (editingId) {
-        await fetch(`${API_URL}/${editingId}`, {
+        response = await fetch(`${API_URL}/${editingId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(projectData)
         });
-        setMessage('✅ Project updated!');
       } else {
-        await fetch(API_URL, {
+        response = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(projectData)
         });
-        setMessage('✅ Project added!');
       }
 
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to save project');
+      }
+
+      setMessage(editingId ? '✅ Project updated!' : '✅ Project added!');
       resetForm();
-      fetchProjects();
+      await fetchProjects();
     } catch (error) {
-      setMessage('❌ Failed to save project');
+      setMessage(`❌ ${error.message || 'Failed to save project'}`);
     } finally {
       setLoading(false);
     }
