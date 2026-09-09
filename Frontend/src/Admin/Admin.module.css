@@ -1,0 +1,1747 @@
+/* Admin.module.css - Complete */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --primary: #ff6201;
+  --primary-dark: #e05500;
+  --primary-light: #ff7a2a;
+  --primary-gradient: linear-gradient(135deg, #ff6201 0%, #ff8a3c 100%);
+  --primary-gradient-dark: linear-gradient(135deg, #e05500 0%, #ff7a2a 100%);
+  --primary-shadow: rgba(255, 98, 1, 0.3);
+  --primary-shadow-hover: rgba(255, 98, 1, 0.5);
+  --bg-light: #fff8f3;
+  --border-color: #ffe0cc;
+  --text-dark: #2d3748;
+  --text-medium: #4a5568;
+  --text-light: #718096;
+}
+
+/* ==========================================
+   MAIN CONTAINER
+   ========================================== */
+.adminContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-light);
+  min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: var(--primary-gradient);
+  border-radius: 16px;
+  color: white;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px var(--primary-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.adminHeader::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.adminHeader::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -10%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+}
+
+.adminHeader h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.logoutBtn {
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   LOGIN FORM
+   ========================================== */
+.loginForm {
+  max-width: 420px;
+  margin: 100px auto;
+  padding: 50px 40px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.loginForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.loginForm h1 {
+  text-align: center;
+  margin-bottom: 35px;
+  color: var(--text-dark);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.loginForm h1::after {
+  content: '🔐';
+  display: block;
+  font-size: 40px;
+  margin-top: 10px;
+}
+
+.loginForm .formGroup {
+  margin-bottom: 25px;
+}
+
+.loginForm .formGroup label {
+  font-weight: 600;
+  color: var(--text-medium);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.loginForm .formGroup input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.loginForm .formGroup input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 98, 1, 0.1);
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-shadow);
+}
+
+/* ==========================================
+   MESSAGE
+   ========================================== */
+.message {
+  padding: 14px 20px;
+  background: #fff0e6;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border-left: 5px solid var(--primary);
+  color: var(--text-dark);
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   TABS
+   ========================================== */
+.adminTabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.tabBtn {
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--text-light);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tabBtn:hover {
+  background: #fff0e6;
+  color: var(--text-dark);
+}
+
+.tabBtn.active {
+  color: var(--primary);
+  background: #fff0e6;
+}
+
+.tabBtn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-gradient);
+  border-radius: 3px 3px 0 0;
+}
+
+/* ==========================================
+   ADMIN FORM
+   ========================================== */
+.adminForm {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  margin-bottom: 35px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.adminForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.adminForm h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f7fafc;
+}
+
+.adminForm h2::before {
+  content: '';
+  width: 4px;
+  height: 30px;
+  background: var(--primary-gradient);
+  border-radius: 4px;
+}
+
+/* ==========================================
+   FORM GROUPS
+   ========================================== */
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-medium);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 98, 1, 0.1);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.formGroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* ==========================================
+   FILE UPLOAD
+   ========================================== */
+.formGroup input[type="file"] {
+  padding: 10px;
+  background: #fff8f3;
+  border: 2px dashed #ffe0cc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.formGroup input[type="file"]:hover {
+  background: #fff0e6;
+  border-color: var(--primary);
+}
+
+.formGroup input[type="file"]::-webkit-file-upload-button {
+  padding: 8px 20px;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.formGroup input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--primary-gradient-dark);
+  transform: scale(1.02);
+}
+
+/* ==========================================
+   IMAGE PREVIEW
+   ========================================== */
+.imagePreview {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fff8f3;
+  border-radius: 12px;
+  border: 2px dashed #ffe0cc;
+  display: inline-block;
+}
+
+.imagePreview img {
+  max-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* ==========================================
+   FORM ACTIONS
+   ========================================== */
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid #f7fafc;
+}
+
+.submitBtn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--primary-gradient);
+  color: white;
+  flex: 1;
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-shadow);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fc8181;
+  color: white;
+}
+
+.cancelBtn:hover {
+  background: #f56565;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   PROJECTS LIST
+   ========================================== */
+.projectsList {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.projectsList::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.projectsList h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: var(--text-dark);
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badgeCount {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 2px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   TABLE
+   ========================================== */
+.adminTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.adminTable thead {
+  background: #fff8f3;
+}
+
+.adminTable th {
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--text-medium);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.adminTable tbody tr:hover {
+  background: #fff8f3;
+}
+
+.adminTable td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #edf2f7;
+  color: var(--text-dark);
+}
+
+.adminTable tbody tr:last-child td {
+  border-bottom: none;
+}
+.adminTable button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+ 
+}
+/* ==========================================
+   EDIT / DELETE BUTTONS - Enhanced Colors
+   ========================================== */
+
+/* ----- Action Buttons Container ----- */
+.adminTable td .actionBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adminTable td .actionBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ----- Edit Button (Orange/Gold) ----- */
+.adminTable td .actionBtn.edit {
+  background: linear-gradient(135deg, #f7971e, #ffc45e);
+  color: #1a0a00;
+  box-shadow: 0 4px 15px rgba(247, 151, 30, 0.3);
+}
+
+.adminTable td .actionBtn.edit:hover {
+  background: linear-gradient(135deg, #e88a1a, #f0b800);
+  box-shadow: 0 6px 25px rgba(247, 151, 30, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ----- Delete Button (Red) ----- */
+.adminTable td .actionBtn.delete {
+  background: linear-gradient(135deg, #fc8181, #f56565);
+  color: white;
+  box-shadow: 0 4px 15px rgba(252, 129, 129, 0.3);
+}
+
+.adminTable td .actionBtn.delete:hover {
+  background: linear-gradient(135deg, #f56565, #e53e3e);
+  box-shadow: 0 6px 25px rgba(252, 129, 129, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ----- View Button (Blue) - Optional ----- */
+.adminTable td .actionBtn.view {
+  background: linear-gradient(135deg, #4299e1, #3182ce);
+  color: white;
+  box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+}
+
+.adminTable td .actionBtn.view:hover {
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+  box-shadow: 0 6px 25px rgba(66, 153, 225, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}
+ 
+.completeLinkInput{
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+   ========================================== */
+.actionBtn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+}
+
+.actionBtn.edit {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.actionBtn.edit:hover {
+  background: var(--primary-gradient-dark);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px var(--primary-shadow);
+}
+
+.actionBtn.delete {
+  background: #fc8181;
+  color: white;
+}
+
+.actionBtn.delete:hover {
+  background: #f56565;
+  transform: scale(1.05);
+}
+
+.actionBtn.confirm {
+  background: #48bb78;
+  color: white;
+}
+
+.actionBtn.confirm:hover {
+  background: #38a169;
+}
+
+.actionBtn.cancel {
+  background: #fc8181;
+  color: white;
+}
+
+.actionBtn.cancel:hover {
+  background: #f56565;
+}
+
+.actionBtn.complete {
+  background: #4299e1;
+  color: white;
+}
+
+.actionBtn.complete:hover {
+  background: #3182ce;
+}
+
+.paymentSlip { margin-top: 10px; padding: 10px; background: #edfdf2; border-radius: 8px; color: #276749; font-size: 13px; }
+.paymentSlip a { color: #276749; font-weight: 700; }
+.viewSlipBtn { margin-top: 7px; border: 0; background: transparent; padding: 0; color: #276749; font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.slipModal { width: min(90vw, 800px); max-height: 90vh; overflow: auto; background: #fff; border-radius: 14px; }
+.slipPreview { display: block; max-width: 100%; max-height: 75vh; margin: 0 auto 20px; object-fit: contain; }
+.assignCrewSection input, .assignCrewSection textarea { width: 100%; box-sizing: border-box; margin: 6px 0; padding: 9px; border: 1px solid #cbd5e0; border-radius: 6px; font: inherit; }
+
+/* ==========================================
+   BOOKINGS
+   ========================================== */
+.bookingsList {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.bookingsList::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.bookingsList h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: var(--text-dark);
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bookingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.bookingCard {
+  background: #fafbfc;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bookingCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
+}
+
+.bookingCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary-gradient);
+  opacity: 0.5;
+}
+
+.bookingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.bookingUser h3 {
+  margin: 0 0 6px 0;
+  color: #2d3748;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bookingEmail {
+  margin: 4px 0;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bookingPhone {
+  margin: 4px 0;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.bookingDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  margin: 12px 0;
+}
+
+.bookingInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px dashed #f5f5f5;
+}
+
+.bookingInfo .label {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 13px;
+  min-width: 70px;
+}
+
+.bookingInfo .value {
+  color: #2d3748;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.bookingMessage {
+  grid-column: 1 / -1;
+  margin: 12px 0;
+  padding: 12px;
+  background: white;
+  border-radius: 10px;
+  border-left: 3px solid var(--primary);
+}
+
+.bookingMessage .label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.bookingMessage p {
+  margin: 0;
+  color: #2d3748;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.bookingDate {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #edf2f7;
+  text-align: right;
+  color: #718096;
+  font-size: 12px;
+}
+
+.bookingDate .label {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+/* ==========================================
+   BOOKING ACTIONS - Enhanced Buttons
+   ========================================== */
+.bookingActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #edf2f7;
+  flex-wrap: wrap;
+}
+
+.bookingActions .actionBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex: 1;
+  min-width: 90px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+.bookingActions .actionBtn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.bookingActions .actionBtn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+.bookingActions .actionBtn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.bookingActions .actionBtn:active {
+  transform: scale(0.95);
+}
+
+.bookingActions .confirm {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}
+
+.bookingActions .confirm:hover {
+  background: linear-gradient(135deg, #38a169, #2f855a);
+  box-shadow: 0 6px 25px rgba(72, 187, 120, 0.4);
+}
+
+.bookingActions .cancel {
+  background: linear-gradient(135deg, #fc8181, #f56565);
+  color: white;
+  box-shadow: 0 4px 15px rgba(252, 129, 129, 0.3);
+}
+
+.bookingActions .cancel:hover {
+  background: linear-gradient(135deg, #f56565, #e53e3e);
+  box-shadow: 0 6px 25px rgba(252, 129, 129, 0.4);
+}
+
+.bookingActions .complete {
+  background: linear-gradient(135deg, #4299e1, #3182ce);
+  color: white;
+  box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+}
+
+.bookingActions .complete:hover {
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+  box-shadow: 0 6px 25px rgba(66, 153, 225, 0.4);
+}
+
+.bookingActions .delete {
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+  color: white;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+}
+
+.bookingActions .delete:hover {
+  background: linear-gradient(135deg, #c53030, #9b2c2c);
+  box-shadow: 0 6px 25px rgba(229, 62, 62, 0.4);
+}
+
+/* ==========================================
+   CREW
+   ========================================== */
+.crewContainer {
+  margin-top: 20px;
+}
+
+.crewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.crewHeader h2 {
+  color: #1a0a00;
+  font-size: 22px;
+}
+
+.addCrewBtn {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #38893b, #66BB6A);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(76, 175, 80, 0.18);
+}
+
+.addCrewBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(76, 175, 80, 0.25);
+}
+
+.crewForm {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.crewForm h3 {
+  margin-bottom: 16px;
+  color: #1a0a00;
+}
+
+.crewForm .formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.crewForm .formGroup {
+  margin-bottom: 16px;
+}
+
+.crewForm .formGroup label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 14px;
+}
+
+.crewForm .formGroup input,
+.crewForm .formGroup select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.crewForm .formGroup input:focus,
+.crewForm .formGroup select:focus {
+  outline: none;
+  border-color: #f7971e;
+}
+
+.imageUploadWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imageUploadInput {
+  display: none;
+}
+
+.imageUploadLabel {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #f7971e, #ffc45e);
+  color: #1a0a00;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.imageUploadLabel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(247, 151, 30, 0.3);
+}
+
+.removeImageBtn {
+  padding: 10px 16px;
+  background: #fc8181;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.removeImageBtn:hover {
+  background: #f56565;
+  transform: translateY(-2px);
+}
+
+.crewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.crewCard {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s ease;
+}
+
+.crewCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.crewCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.crewAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7971e, #ffc45e);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crewAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.crewAvatarText {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.crewInfo h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #1a0a00;
+}
+
+.crewRole {
+  display: inline-block;
+  font-size: 12px;
+  color: #f7971e;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: rgba(247, 151, 30, 0.1);
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-top: 2px;
+}
+
+.crewCardBody p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.crewCardActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.crewCardActions .actionBtn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.crewCardActions .actionBtn:hover {
+  transform: translateY(-2px);
+}
+
+.crewCardActions .edit {
+  background: #4299e1;
+  color: white;
+   border-radius: 50px;
+   padding: 5px 20px;
+   border: none;
+   
+   
+}
+
+.crewCardActions .edit:hover {
+  background: #3182ce;
+  
+
+}
+
+.crewCardActions .delete {
+  background: #fc8181;
+  color: white;
+  border-radius: 50px;
+   padding: 5px 20px;
+   border: none;
+   
+}
+
+.crewCardActions .delete:hover {
+  background: #f56565;
+}
+
+/* ==========================================
+   MODAL
+   ========================================== */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalContent {
+  background: white;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modalHeader h2 {
+  color: #c62828;
+  font-size: 22px;
+  margin: 0;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.modalClose:hover {
+  color: #c62828;
+}
+
+.modalBody {
+  padding: 24px;
+}
+
+.cancelTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.3s ease;
+}
+
+.cancelTextarea:focus {
+  outline: none;
+  border-color: #f44336;
+}
+
+.completeInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.completeInput:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.helpText {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.confirmCancelBtn {
+  flex: 1;
+  padding: 12px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirmCancelBtn:hover:not(:disabled) {
+  background: #d32f2f;
+  transform: translateY(-2px);
+}
+
+.confirmCancelBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.confirmCompleteBtn {
+  flex: 1;
+  padding: 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirmCompleteBtn:hover:not(:disabled) {
+  background: #388E3C;
+  transform: translateY(-2px);
+}
+
+.confirmCompleteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modalCancelBtn {
+  flex: 1;
+  padding: 12px;
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalCancelBtn:hover {
+  background: #bdbdbd;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .adminContainer {
+    padding: 12px;
+  }
+
+  .adminHeader {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 16px 20px;
+  }
+
+  .adminHeader h1 {
+    font-size: 22px;
+  }
+
+  .adminForm {
+    padding: 24px 20px;
+  }
+
+  .adminForm h2 {
+    font-size: 20px;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .submitBtn {
+    flex: none;
+    width: 100%;
+  }
+
+  .cancelBtn {
+    width: 100%;
+  }
+
+  .projectsList {
+    padding: 16px;
+    overflow-x: auto;
+  }
+
+  .adminTable {
+    font-size: 14px;
+    min-width: 600px;
+  }
+
+  .adminTable th,
+  .adminTable td {
+    padding: 10px 12px;
+  }
+
+  .loginForm {
+    margin: 50px 16px;
+    padding: 30px 20px;
+  }
+
+  .adminTabs {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tabBtn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .bookingsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bookingCard {
+    padding: 18px;
+  }
+
+  .bookingHeader {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bookingDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .bookingInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .bookingInfo .value {
+    text-align: left;
+    width: 100%;
+  }
+
+  .bookingActions {
+    flex-direction: column;
+  }
+
+  .bookingActions .actionBtn {
+    width: 100%;
+    flex: none;
+  }
+
+  .crewForm .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .crewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .crewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .addCrewBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .imageUploadWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .imageUploadLabel {
+    width: 100%;
+    text-align: center;
+  }
+
+  .removeImageBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modalContent {
+    width: 95%;
+  }
+
+  .modalFooter {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminHeader h1 {
+    font-size: 18px;
+  }
+
+  .logoutBtn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .adminForm h2 {
+    font-size: 18px;
+  }
+
+  .formGroup label {
+    font-size: 13px;
+  }
+
+  .formGroup input,
+  .formGroup textarea,
+  .formGroup select {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .loginForm h1 {
+    font-size: 26px;
+  }
+
+  .bookingsList {
+    padding: 16px;
+  }
+
+  .bookingsList h2 {
+    font-size: 20px;
+  }
+
+  .bookingCard {
+    padding: 14px;
+  }
+
+  .bookingUser h3 {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   SCROLLBAR
+   ========================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-gradient-dark);
+}
+
+/* ==========================================
+   ASSIGN CREW STYLES
+   ========================================== */
+
+.assignCrewSection {
+  margin-top: 16px;
+}
+
+.assignCrewSection h4 {
+  margin-bottom: 8px;
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.assignNote {
+  color: var(--text-light);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.crewCheckboxList {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.crewCheckboxItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.crewCheckboxItem:last-child {
+  border-bottom: none;
+}
+
+.crewCheckboxItem:hover {
+  background: var(--bg-light);
+}
+
+.crewCheckboxItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+.crewCheckboxAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.crewCheckboxAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.crewCheckboxName {
+  font-weight: 600;
+  color: var(--text-dark);
+  flex: 1;
+}
+
+.crewCheckboxUnit {
+  font-size: 12px;
+  color: var(--text-light);
+  background: #f0f0f0;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.noCrewAvailable {
+  text-align: center;
+  padding: 24px;
+  background: #fff8f3;
+  border-radius: 12px;
+  border: 1px dashed var(--border-color);
+}
+
+.noCrewAvailable p {
+  color: var(--text-medium);
+  margin: 4px 0;
+}
+
+.noCrewNote {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.assignedCrewBadge {
+  padding: 4px 14px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #a5d6a7;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .crewCheckboxItem {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .crewCheckboxUnit {
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+}

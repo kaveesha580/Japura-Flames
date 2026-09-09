@@ -28,7 +28,7 @@ const BookingSchema = new mongoose.Schema({
   },
   eventType: {
     type: String,
-    enum: ['Wedding', 'Party', 'Corporate', 'Concert', 'Sports', 'Other'],
+    enum: [ 'Party', 'Corporate', 'Concert', 'Sports', 'Other'],
     required: true,
   },
   eventDate: {
@@ -44,17 +44,16 @@ const BookingSchema = new mongoose.Schema({
     required: true,
   },
   
-  // Service Type
   serviceType: {
     type: [String],
     enum: ['Photographer', 'Videographer', 'Broadcaster', 'All'],
     required: true,
   },
   
-  // Additional Details
+  
   duration: {
     type: String,
-    enum: ['2 Hours', '4 Hours', '6 Hours', '8 Hours', 'Full Day'],
+    enum: ['1 Hours', '2 Hours', '4 Hours', '6 Hours', '8 Hours', 'Full Day'],
     required: true,
   },
   specialRequirements: {
@@ -66,10 +65,10 @@ const BookingSchema = new mongoose.Schema({
     default: '',
   },
   
-  // Status
+
   status: {
     type: String,
-    enum: ['Pending', 'Confirmed', 'In Progress', 'Completed', 'Cancelled'],
+    enum: ['Pending', 'Price Sent', 'Confirmed', 'In Progress', 'Completed', 'Cancelled'],
     default: 'Pending'
   },
   
